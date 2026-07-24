@@ -3,7 +3,7 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
-import type { Cv, ExperienceItem, ProjectItem } from '@/lib/schema';
+import type { Cv, ExperienceItem, ProjectItem, VolunteerItem } from '@/lib/schema';
 import { Plus, Trash2 } from 'lucide-react';
 import { SortableList } from './SortableList';
 import type { ReactNode } from 'react';
@@ -572,6 +572,104 @@ export function CvEditor() {
           </div>
         )}
       />
+
+      <SectionHeader
+        title="Volunteer Experience"
+        onAdd={() =>
+          updateCv((c) => ({
+            ...c,
+            volunteer: [
+              ...(c.volunteer ?? []),
+              { organization: '', role: '', startDate: '', endDate: '', bullets: [''] },
+            ],
+          }))
+        }
+      />
+      <SortableList
+        items={cv.volunteer ?? []}
+        getId={(_, i) => `vol-${i}`}
+        onReorder={(next) => updateCv((c) => ({ ...c, volunteer: next }))}
+        renderItem={(v, i, handle) => (
+          <div className="flex items-start gap-2">
+            {handle}
+            <div className="flex-1 space-y-2 rounded-md border p-3">
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex-1 grid grid-cols-2 gap-2">
+                  <Input
+                    placeholder="Organization"
+                    value={v.organization}
+                    onChange={(e) => updateVolunteer(updateCv, i, { organization: e.target.value })}
+                  />
+                  <Input
+                    placeholder="Role"
+                    value={v.role}
+                    onChange={(e) => updateVolunteer(updateCv, i, { role: e.target.value })}
+                  />
+                  <Input
+                    placeholder="Start"
+                    value={v.startDate}
+                    onChange={(e) => updateVolunteer(updateCv, i, { startDate: e.target.value })}
+                  />
+                  <Input
+                    placeholder="End"
+                    value={v.endDate}
+                    onChange={(e) => updateVolunteer(updateCv, i, { endDate: e.target.value })}
+                  />
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() =>
+                    updateCv((c) => ({
+                      ...c,
+                      volunteer: (c.volunteer ?? []).filter((_, idx) => idx !== i),
+                    }))
+                  }
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
+              <SortableList
+                items={v.bullets}
+                getId={(_, j) => `vol-${i}-b-${j}`}
+                onReorder={(next) => updateVolunteer(updateCv, i, { bullets: next })}
+                renderItem={(b, j, bulletHandle) => (
+                  <div className="flex items-start gap-2">
+                    {bulletHandle}
+                    <Textarea
+                      rows={2}
+                      value={b}
+                      onChange={(e) => {
+                        const next = [...v.bullets];
+                        next[j] = e.target.value;
+                        updateVolunteer(updateCv, i, { bullets: next });
+                      }}
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() =>
+                        updateVolunteer(updateCv, i, {
+                          bullets: v.bullets.filter((_, idx) => idx !== j),
+                        })
+                      }
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                )}
+              />
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => updateVolunteer(updateCv, i, { bullets: [...v.bullets, ''] })}
+              >
+                <Plus className="mr-1 h-4 w-4" /> Bullet
+              </Button>
+            </div>
+          </div>
+        )}
+      />
     </div>
   );
 }
@@ -595,5 +693,16 @@ function updateProject(
   updateCv((c) => ({
     ...c,
     projects: c.projects.map((row, idx) => (idx === index ? { ...row, ...patch } : row)),
+  }));
+}
+
+function updateVolunteer(
+  updateCv: (updater: (c: Cv) => Cv) => void,
+  index: number,
+  patch: Partial<VolunteerItem>,
+) {
+  updateCv((c) => ({
+    ...c,
+    volunteer: (c.volunteer ?? []).map((row, idx) => (idx === index ? { ...row, ...patch } : row)),
   }));
 }

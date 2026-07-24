@@ -13,8 +13,20 @@ export const tomaszCv: Cv = {
     },
   },
   summary:
-    "Full-stack leaning Frontend Developer with commercial experience building AI-powered platforms and cross-platform mobile apps. Proficient in TypeScript, Next.js, React Native, and Nest.js. Double hackathon winner - including 1st place at HackYeah, Europe's largest stationary hackathon. Track record of independently owning features from UI/UX design through to backend implementation, exceeding expectations in both internships. Graduating high school May 2026, available full-time from June 2026.",
+    "Full-Stack Developer with commercial experience building AI-powered platforms and cross-platform mobile apps. Proficient in TypeScript, Next.js, React Native, and Nest.js. Double hackathon winner - including 1st place at HackYeah, Europe's largest stationary hackathon. Track record of independently owning features from UI/UX design through to backend implementation, exceeding expectations in both internships.",
   experience: [
+    {
+      company: 'Fullstack House',
+      role: 'Full Stack Engineer',
+      startDate: 'May 2026',
+      endDate: 'Present',
+      bullets: [
+        'Delivered production web apps end-to-end, owning features from frontend implementation through backend architecture and deployment.',
+        'Built motion-rich Next.js frontends with a focus on animation and UX, rapidly prototyping new features before production implementation.',
+        'Architected backend services in NestJS and PostgreSQL, designing schemas and APIs to support production features.',
+        'Shipped reliably through Dockerised CI/CD pipelines and preview environments, keeping releases fast and low-risk.',
+      ],
+    },
     {
       company: 'discurso.ai',
       role: 'Frontend & Full-Stack Developer Internship',
@@ -40,6 +52,17 @@ export const tomaszCv: Cv = {
   ],
   projects: [
     {
+      name: 'Halupedia',
+      url: 'halupedia.com',
+      description:
+        'Co-created Halupedia, a satirical Wikipedia clone where every article is generated on the fly by an LLM pretending it has always existed - complete with fake footnotes, fictional scholars, and invented historical events.',
+      bullets: [
+        'Built on a Cloudflare Worker with results cached forever in KV, so each hallucinated article is generated once and served instantly after.',
+        'Reached #1 on Hacker News and grew to 300k+ users within weeks of launch, with coverage across Cybernews, TechRound, Futurism, Fast Company, and Slashdot.',
+        'Includes AI-hallucinated user identities and threaded, Wikipedia-talk-page-style comments, with no signup required.',
+      ],
+    },
+    {
       name: 'Gace AI',
       url: 'gace.dev',
       description:
@@ -51,22 +74,14 @@ export const tomaszCv: Cv = {
       ],
     },
     {
-      name: 'PC Shop',
-      url: 'pc-shop-peach.vercel.app',
+      name: 'Nuecli',
+      url: 'github.com/Majkipl27/neucli',
       description:
-        'Full-stack e-commerce store for PC components built with Next.js, TypeScript, Prisma ORM, PostgreSQL, and Tailwind CSS.',
+        'Comprehensive platform for building production-ready React + TypeScript + Tailwind SPAs from YAML configuration. Includes a CLI scaffolding engine and a visual CMS editor with drag-and-drop configuration management.',
       bullets: [
-        'Features product browsing, a cart system, and user authentication.',
-        'Deployed on Vercel.',
-      ],
-    },
-    {
-      name: 'CSS Masters',
-      url: 'github.com/Majkipl27/Css-Masters',
-      description:
-        'A competitive CSS challenge platform with a separate backend. Frontend in React/TypeScript, backend in Nest.js.',
-      bullets: [
-        'Demonstrates the ability to architect and ship a multi-repo full-stack project independently.',
+        'Visual editor with block-based drag-and-drop configuration and real-time YAML export.',
+        'Built-in SEO hook generation and persistent global layouts to prevent unnecessary re-renders.',
+        'Zustand-based state management with undo/redo and an auto-registered modular block system.',
       ],
     },
   ],
@@ -81,8 +96,7 @@ export const tomaszCv: Cv = {
       school: 'CKE (Centralna Komisja Egzaminacyjna)',
       degree: 'Dyplom zawodowy - Technik Programista',
       startDate: '',
-      endDate: 'Expected May 2026',
-      notes: 'All required professional examinations passed. Diploma pending school graduation.',
+      endDate: 'May 2026',
     },
   ],
   skills: [
